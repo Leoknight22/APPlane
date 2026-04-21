@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <title>APPlane – Phase Plane Plotter</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body onload="initializeCanvas()">
+
+<header class="topbar">
+  <div class="header-content">
+    <h1>APPlane</h1>
+    <p>Phase plane plotter for systems of differential equations with custom parameter animation feature</p>
+  </div>
+  <div class="version">v1.0_210426</div>
+</header>
+
+<main class="layout">
+
+  <!-- CONTROLS -->
+  <aside class="controls">
+
+    <section class="card">
+      <h3>Equations</h3>
+      <label>dx/dt <input id="xprime_id" value="y"></label>
+      <label>dy/dt <input id="yprime_id" value="-x"></label>
+    </section>
+
+    <section class="card">
+      <h3>Domain</h3>
+      <div class="grid-2">
+        <label>Min x <input id="xmin_id" value="-5"></label>
+        <label>Max x <input id="xmax_id" value="5"></label>
+        <label>Min y <input id="ymin_id" value="-5"></label>
+        <label>Max y <input id="ymax_id" value="5"></label>
+        <label>Min t <input id="tmin_id" value="-16"></label>
+        <label>Max t <input id="tmax_id" value="16"></label>
+      </div>
+    </section>
+
+    <section class="card">
+      <h3>Arrows</h3>
+      <label>Number of arrows
+        <input id="arrownumber_id" value="20">
+      </label>
+      <div class="button-row">
+        <button onclick="moreArrows()">+</button>
+        <button onclick="fewerArrows()">−</button>
+        <button onclick="resetArrows()">Grid</button>
+      </div>
+      <label class="checkbox">
+        <input type="checkbox" id="variableArrows" checked>
+        Variable length
+      </label>
+      <label class="checkbox">
+        <input type="checkbox" id="manyArrows" checked>
+        Show time as color
+      </label>
+      <label>Arrow length
+        <input id="arrow_id" value="10">
+      </label>
+    </section>
+
+    <section class="card">
+      <h3>Trace & Zoom</h3>
+      <label>Initial x <input id="xO_id" value="4"></label>
+      <label>Initial y <input id="yO_id" value="2"></label>
+      <label>Initial t <input id="tO_id" value="0"></label>
+      <label>Line width <input id="linewidth_id" value="2"></label>
+      <div class="button-row">
+        <button onclick="traceFromNumbers()">Trace path</button>
+      </div>
+      <div class="button-row">
+        <button onclick="zoomIn()">Zoom +</button>
+        <button onclick="zoomOut()">Zoom −</button>
+      </div>
+      <label class="checkbox">
+        <input type="checkbox" id="initialPosition">
+        Show initial position
+      </label>
+    </section>
+
+    <section class="card">
+      <h3>Render</h3>
+      <button class="primary" onclick="draw()">Graph Phase Plane</button>
+    </section>
+
+    <section class="card">
+      <h3>Animation</h3>
+      <label>dx/dt
+        <input id="xprime_custom_id" value="y">
+      </label>
+      <label>dy/dt
+        <input id="yprime_custom_id" value="-x*x-y+p">
+      </label>
+      <label>p start <input id="p0_id" value="4"></label>
+      <label>p max <input id="pmax_id" value="0"></label>
+      <label>p step <input id="pstep_id" value="0.05"></label>
+      <label class="checkbox">
+        <input type="checkbox" id="reverseAnimation" checked>
+        Reverse animation
+      </label>
+      <button class="primary" onclick="startanimation()">Animate</button>
+    </section>
+
+  </aside>
+
+  <!-- GRAPH -->
+  <section class="graph-area">
+    <div class="canvas-wrapper">
+  		<canvas id="yAxisCanvas"></canvas>
+  		<canvas id="myCanvas"></canvas>
+  		<canvas id="spacerCanvas"></canvas>
+  		<canvas id="xAxisCanvas"></canvas>
+	</div>
+  </section>
+
+</main>
+
+<footer class="bottombar">
+  <p><strong>Licensing:</strong> Educational & personal use only — no warranty.</p>
+</footer>
+
+<script src="pplane.js"></script>
+<script src="animate.js"></script>
+
+</body>
+</html>
