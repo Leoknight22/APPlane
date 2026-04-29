@@ -190,6 +190,8 @@ button.primary:hover {
   grid-template-columns: 60px 1fr;
   grid-template-rows: 1fr 60px;
   gap: 0;
+  overflow-x: auto;
+
 }
 
 #yAxisCanvas {
@@ -215,6 +217,9 @@ button.primary:hover {
 canvas {
   background: white;
   border: 1px solid #999;
+  max-width: 100%;
+  height: auto;
+
 }
 
 /* FOOTER */
@@ -226,13 +231,55 @@ canvas {
 }
 
 /* RESPONSIVE */
+
 @media (max-width: 900px) {
+
+  .topbar {
+    padding: 1rem;
+    text-align: center;
+  }
+
+  .version {
+    position: static;
+    margin-top: 0.5rem;
+  }
+
   .layout {
     grid-template-columns: 1fr;
+    height: auto;
+  }
+
+  aside {
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    order: 1;
+  }
+
+  .controls {
+    max-height: none;
   }
 
   .graph-area {
-    order: -1;
-    min-height: 400px;
+    order: 2;
+    padding: 0.5rem;
+  }
+}
+
+@media (max-width: 600px) {
+
+  .grid-2 {
+    grid-template-columns: 1fr;
+  }
+
+  button {
+    width: 100%;
+  }
+
+  .button-row {
+    flex-direction: column;
+  }
+
+  input {
+    font-size: 16px; /* evita zoom automatico iOS */
   }
 }
