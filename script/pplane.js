@@ -3,8 +3,12 @@
 
 // Define x', y'
 function setDerivatives(){
-		yprimeString = parseFunction(document.getElementById('yprime_id').value);
-		xprimeString = parseFunction(document.getElementById('xprime_id').value);
+    xprimeString = document.getElementById('xprime_id').value;
+    yprimeString = document.getElementById('yprime_id').value;
+    xprimeString = xprimeString.replaceAll("p", p);
+	  yprimeString = yprimeString.replaceAll("p", p);
+    xprimeString = parseFunction(xprimeString);
+		yprimeString = parseFunction(yprimeString);
 		try  {
 			eval("yprime = function (x,y,t) { with(Math) {return " + yprimeString + ";}}");
 		} catch (e) {
@@ -650,7 +654,7 @@ var doMouseDown=function(canvas, xcoord, ycoord){
 		prevX=X;
 		prevY=Y;
 		T = tO*1.0;
-		while (tstep < 800  
+		while (tstep < 300
 			&& X < xmax+100*(xmax-xmin)
 			&& X > xmin-100*(xmax-xmin)
 			&& Y < ymax+100*(xmax-xmin) 
