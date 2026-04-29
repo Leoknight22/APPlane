@@ -1,8 +1,8 @@
 :root {
   --bg: #f4f6fb;
   --panel: #ffffff;
-  --primary: #4f5dff;
-  --primary-dark: #3b48cc;
+  --primary: #267a37;
+  --primary-dark: #22621b;
   --text: #1f2937;
   --muted: #6b7280;
   --border: #e5e7eb;
@@ -54,10 +54,41 @@ body {
   height: calc(100vh - 120px);
 }
 
+/* ASIDE */
+aside {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border-right: 1px solid var(--border);
+  overflow: hidden;
+}
+
 /* CONTROLS */
 .controls {
   padding: 1rem;
   overflow-y: auto;
+  flex: 1;
+  min-height: 0;
+}
+
+/* ANALYSIS PANEL */
+.analysis-panel {
+  padding: 1rem;
+  border-top: 1px solid var(--border);
+  background: var(--panel);
+  flex-shrink: 0;
+}
+
+.analysis-panel h3 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+}
+
+.analysis-panel p {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--muted);
 }
 
 .card {
@@ -93,6 +124,12 @@ input:focus {
   border-color: var(--primary);
 }
 
+input[type=checkbox] {
+  width: auto;
+  accent-color: var(--primary);
+
+}
+
 /* GRID */
 .grid-2 {
   display: grid;
@@ -117,6 +154,8 @@ button.primary {
   background: var(--primary);
   color: white;
   border: none;
+  font-size: 0.85rem;
+  font-weight: bold;
 }
 
 button.primary:hover {
