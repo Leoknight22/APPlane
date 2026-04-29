@@ -1,4 +1,4 @@
-let p=0;
+let p;
 let pmax=0;
 let pstep=0;
 let direction;
@@ -7,6 +7,13 @@ let mint;
 let xstept;
 let ystept;
 
+function render(){
+	if(p!=parseFloat(pmax)){
+		p=document.getElementById('p0_id').value;
+	}
+	draw();
+}
+
 function startanimation() {
 	if(!running){
 		p=document.getElementById('p0_id').value;
@@ -14,8 +21,12 @@ function startanimation() {
 		pstep=document.getElementById('pstep_id').value;
         xmint=document.getElementById('xmin_id').value;
         ymint=document.getElementById('ymin_id').value;
-        xstept=(document.getElementById('xmax_id').value-xmint)/10;
-        ystept=(document.getElementById('ymax_id').value-ymint)/10;
+		xmaxt=document.getElementById('xmax_id').value;
+		ymaxt=document.getElementById('ymax_id').value;
+		xcenter=(parseFloat(xmaxt)+parseFloat(xmint))/2.0;
+		ycenter=(parseFloat(ymaxt)+parseFloat(ymint))/2.0;
+        xstept=(xmaxt-xmint)/10;
+        ystept=(ymaxt-ymint)/10;
 
 
 
@@ -37,32 +48,33 @@ function startanimation() {
 }
 
 function animation() {
-	let xprimeString = document.getElementById('xprime_custom_id').value;
-	let yprimeString = document.getElementById('yprime_custom_id').value;
-	xprimeString = xprimeString.replaceAll("p", p);
-	yprimeString = yprimeString.replaceAll("p", p);
-	document.getElementById('xprime_id').value = xprimeString;
-	document.getElementById('yprime_id').value = yprimeString;
-
     draw();
 
-	document.getElementById("yO_id").value=0;
+	document.getElementById("yO_id").value=ycenter;
 	for(let i=0;i<=10;i++){
 		document.getElementById("xO_id").value=parseFloat(xmint)+parseFloat(xstept*i);
 		traceFromNumbers();
 	}
-	document.getElementById("xO_id").value=0;
+	document.getElementById("xO_id").value=xcenter;
 	for(let i=0;i<=10;i++){
 		if(i!=0){
 			document.getElementById("yO_id").value=parseFloat(ymint)+parseFloat(ystept*i);
 			traceFromNumbers();
 		}
 	}
+	document.getElementById("xO_id").value=parseFloat(xmint)+parseFloat(xstept);
+	document.getElementById("yO_id").value=parseFloat(ymint)+parseFloat(ystept);
+	traceFromNumbers();
+	document.getElementById("xO_id").value=parseFloat(xmint)+parseFloat(xstept)*1.5;
+	document.getElementById("yO_id").value=parseFloat(ymint)+parseFloat(ystept)/2;
+	traceFromNumbers();
+	document.getElementById("xO_id").value=parseFloat(xmint)+parseFloat(xstept)/2;
+	document.getElementById("yO_id").value=parseFloat(ymint)+parseFloat(ystept)*1.5;
+	traceFromNumbers();
 
-	p=parseFloat(p)+parseFloat(pstep)*direction;	
-	p=p.toFixed(8);
-
-	if(p*direction <= parseFloat(pmax)*direction) {
+	if(p*direction < parseFloat(pmax)*direction) {
+		p=parseFloat(p)+parseFloat(pstep)*direction;	
+		p=p.toFixed(8);
 		requestAnimationFrame(animation);
 	}else{
 		running=false;
